@@ -49,18 +49,19 @@ for now in title:
         break
 
 wait("tgn9uw-3")
+time.sleep(2)
 #點入每篇文章
 article=driver.find_elements_by_class_name("cTrcqd")
 print(len(article))
 print(article)
-time.sleep(5)
+time.sleep(2)
 for nowR in article:
     #print(nowR)
     nowR.click()
     wait("xrkql2-0")
     author=driver.find_element_by_class_name("xrkql2-0")
     print(author)
-    if author.text=="NNCCB":
+    if str(author.text)=="NNCCB":
         print("找到幻想文了!快檢舉!")
         exit()
     driver.back()
