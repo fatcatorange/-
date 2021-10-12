@@ -15,6 +15,8 @@ def wait(classname):
 
 PATH="C:/Users/jason/Desktop/chromedriver_win32/chromedriver"
 
+#'cp950' codec can't encode character
+file=open("job_list.txt","w",encoding='UTF-8')
 driver=webdriver.Chrome(PATH)
 driver.maximize_window()
 driver.get("https://www.chickpt.com.tw/")
@@ -25,7 +27,7 @@ action=ActionChains(driver)
 action.click(close)
 action.perform()
 
-for page in range(50):
+for page in range(5):
     wait("layout-width")
     jobs=[]
     salary=[]
@@ -36,6 +38,7 @@ for page in range(50):
         realSalary=salary[i].text[4:]
         if int(realSalary) > 180 and "時薪" in salary[i].text:
             print(jobs[i].text,salary[i].text)
+            file.write(jobs[i].text + salary[i].text + "\n\n")
     
     time.sleep(1)
     nextPage=driver.find_elements_by_class_name("next-page")
@@ -44,5 +47,5 @@ for page in range(50):
     action.perform()
     time.sleep(2)
     
-
+file.close()
 driver.quit()
